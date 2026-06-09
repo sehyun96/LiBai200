@@ -1,0 +1,187 @@
+:root {
+  --bg: #092f47;
+  --text: #f2fbff;
+  --moon-size: clamp(210px, 22vw, 430px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100svh;
+  background: var(--bg);
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  transition: opacity 760ms ease, transform 760ms ease, visibility 760ms ease;
+}
+
+.screen-main {
+  grid-template-rows: 1fr auto 1fr;
+  row-gap: clamp(18px, 2.6vh, 34px);
+  opacity: 1;
+  visibility: visible;
+}
+
+.screen-poem {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.015);
+  overflow: hidden;
+}
+
+body.is-open .screen-main {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.985);
+  pointer-events: none;
+}
+
+body.is-open .screen-poem {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.moon {
+  grid-row: 2;
+  width: var(--moon-size);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95) 0 3%, transparent 4%),
+    radial-gradient(circle at 68% 25%, rgba(255, 255, 255, 0.78) 0 2%, transparent 3%),
+    radial-gradient(circle at 26% 62%, rgba(255, 255, 255, 0.8) 0 3%, transparent 4%),
+    radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.94) 0 18%, transparent 31%),
+    radial-gradient(circle at 46% 47%, rgba(245, 255, 255, 0.72) 0 13%, transparent 25%),
+    radial-gradient(circle at 70% 58%, rgba(44, 74, 78, 0.68) 0 13%, transparent 24%),
+    radial-gradient(circle at 30% 44%, rgba(40, 72, 75, 0.65) 0 16%, transparent 27%),
+    radial-gradient(circle at 55% 25%, rgba(45, 78, 79, 0.48) 0 10%, transparent 21%),
+    radial-gradient(circle at 72% 72%, rgba(60, 92, 94, 0.56) 0 11%, transparent 23%),
+    linear-gradient(135deg, #eefeff, #a7c9ca 38%, #dfffff 67%, #85aeb0);
+  box-shadow:
+    0 0 16px rgba(238, 255, 255, 0.48),
+    0 0 42px rgba(207, 250, 255, 0.2);
+  filter: saturate(0.82) contrast(1.1) brightness(1.08);
+}
+
+.moon::before,
+.moon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.moon::before {
+  background:
+    radial-gradient(circle at 18% 36%, transparent 0 6%, rgba(255, 255, 255, 0.55) 7%, transparent 8%),
+    radial-gradient(circle at 42% 18%, transparent 0 8%, rgba(255, 255, 255, 0.45) 9%, transparent 10%),
+    radial-gradient(circle at 64% 45%, transparent 0 12%, rgba(255, 255, 255, 0.35) 13%, transparent 15%),
+    radial-gradient(circle at 52% 70%, transparent 0 11%, rgba(255, 255, 255, 0.4) 12%, transparent 14%),
+    radial-gradient(circle at 36% 72%, rgba(24, 55, 60, 0.38), transparent 20%);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+.moon::after {
+  background:
+    linear-gradient(28deg, transparent 0 35%, rgba(255,255,255,0.24) 36%, transparent 38% 100%),
+    linear-gradient(116deg, transparent 0 53%, rgba(255,255,255,0.16) 54%, transparent 56% 100%),
+    radial-gradient(circle at 52% 55%, transparent 0 63%, rgba(255,255,255,0.42) 77%, rgba(255,255,255,0.86) 100%);
+  opacity: 0.82;
+}
+
+.enter-button {
+  grid-row: 3;
+  align-self: start;
+  margin-top: clamp(8px, 1.4vh, 18px);
+  border: 0;
+  padding: 0 0.1em;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: clamp(42px, 4.4vw, 72px);
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 9px rgba(255,255,255,0.16);
+  transition: transform 220ms ease, opacity 220ms ease, text-shadow 220ms ease;
+}
+
+.enter-button:hover,
+.enter-button:focus-visible {
+  opacity: 0.88;
+  transform: translateY(-2px);
+  text-shadow: 0 0 16px rgba(255,255,255,0.33);
+  outline: none;
+}
+
+.poem-wall {
+  position: absolute;
+  inset: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  color: var(--text);
+  font-family: "Noto Serif CJK TC", "Noto Serif CJK KR", "Source Han Serif TC", "Source Han Serif KR", "Songti TC", "Batang", serif;
+  font-size: clamp(25px, 1.72vw, 34px);
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.poem-line {
+  width: max-content;
+  min-width: 100%;
+}
+
+@media (max-width: 700px) {
+  :root {
+    --moon-size: min(58vw, 300px);
+  }
+
+  .screen-main {
+    row-gap: 16px;
+  }
+
+  .enter-button {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .poem-wall {
+    inset: 12px 12px;
+    font-size: clamp(22px, 7vw, 31px);
+    line-height: 1.55;
+    gap: 8px;
+  }
+}

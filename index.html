@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Li Bai</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage" aria-live="polite">
+    <!-- 첫 화면 -->
+    <section class="screen screen-main" id="mainScreen" aria-label="Li Bai main screen">
+      <div class="moon" aria-hidden="true"></div>
+      <button class="enter-button" id="enterButton" type="button" aria-label="Open Li Bai poem screen">
+        Li Bai
+      </button>
+    </section>
+
+    <!-- 두 번째 화면 -->
+    <section class="screen screen-poem" id="poemScreen" aria-label="Li Bai poem screen" aria-hidden="true">
+      <div class="poem-wall" id="poemWall" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
